@@ -1,0 +1,17 @@
+.main-container {
+    width: 100%;
+    height: calc(100vh - 64px);
+    display: flex;
+    justify-content: center;
+}
+
+.toDo-container, .inProgress-container, .testing-container, .done-container {
+    height: 80vh;
+    width: 17.5vw;
+    background-color: rgba(0, 0, 0, 0.25);
+    margin: 2rem;
+    padding: .5rem;
+    h2 {
+        text-align: center;
+    }
+}

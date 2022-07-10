@@ -1,0 +1,10 @@
+<form [formGroup]="taskForm">
+    <input type="text" formControlName="title">
+    <input type="text" formControlName="description">
+    <button>CREATE TASK</button>
+</form>
+
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [mat-dialog-close]="newTask" cdkFocusInitial>Ok</button>
+</div>
