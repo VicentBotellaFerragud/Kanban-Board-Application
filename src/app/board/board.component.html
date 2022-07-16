@@ -1,40 +1,58 @@
-<div class="main-container">
+<div class="main-container" cdkDropListGroup>
 
-    <div class="toDo-container">
+    <div class="toDo-container example-container">
 
         <h2>To Do</h2>
 
-        <div>
+        <div cdkDropList [cdkDropListData]="tasks" class="example-list" (cdkDropListDropped)="drop($event)">
+
+            <p class="example-box" *ngFor="let task of tasks" cdkDrag>
+                task: {{ task.title }}, {{ task.description }}
+            </p>
 
         </div>
 
     </div>
 
-    <div class="inProgress-container">
+    <div class="inProgress-container example-container">
 
         <h2>In Progress</h2>
 
-        <div>
+        <div style="position: relative;" cdkDropList [cdkDropListData]="inProgress" class="example-list" (cdkDropListDropped)="drop($event)" [class.hidden]="inProgress.length === 0">
 
+            <span style="position: absolute; top: 1rem;" *ngIf="inProgress.length === 0">currently empty</span>
+
+            <p class="example-box" *ngFor="let task of inProgress" cdkDrag>
+                task: {{ task.title }}, {{ task.description }}
+            </p>
+            
         </div>
 
     </div>
 
-    <div class="testing-container">
+    <div class="testing-container example-container">
 
         <h2>Testing</h2>
 
-        <div>
+        <div cdkDropList [cdkDropListData]="testing" class="example-list" (cdkDropListDropped)="drop($event)">
+
+            <p class="example-box" *ngFor="let task of testing" cdkDrag>
+                task: {{ task.title }}, {{ task.description }}
+            </p>
 
         </div>
 
     </div>
 
-    <div class="done-container">
+    <div class="done-container example-container">
         
         <h2>Done</h2>
 
-        <div>
+        <div cdkDropList [cdkDropListData]="done" class="example-list" (cdkDropListDropped)="drop($event)">
+
+            <p class="example-box" *ngFor="let task of done" cdkDrag>
+                task: {{ task.title }}, {{ task.description }}
+            </p>
 
         </div>
 

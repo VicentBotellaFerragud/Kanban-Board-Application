@@ -6,5 +6,5 @@
 
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-button [mat-dialog-close]="newTask" cdkFocusInitial>Ok</button>
+    <button mat-button [mat-dialog-close]="newTask" (click)="createTask()" cdkFocusInitial>Ok</button>
 </div>

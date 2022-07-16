@@ -29,4 +29,9 @@ export class DialogCreateTaskComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  createTask() {
+    this.newTask.title = this.taskForm.get('title')?.value;
+    this.newTask.description = this.taskForm.get('description')?.value;
+  }
+
 }
