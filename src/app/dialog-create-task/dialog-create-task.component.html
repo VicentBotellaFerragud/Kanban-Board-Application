@@ -1,8 +1,45 @@
+<!--
 <form [formGroup]="taskForm">
     <input type="text" formControlName="title">
     <input type="text" formControlName="description">
     <button>CREATE TASK</button>
-</form>
+</form>-->
+
+<mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Type the title of your new task</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="taskTitle" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Type the description of your new task</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <input matInput formControlName="taskDescription" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done. Click on "Ok" to create the new task.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
 
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">No Thanks</button>

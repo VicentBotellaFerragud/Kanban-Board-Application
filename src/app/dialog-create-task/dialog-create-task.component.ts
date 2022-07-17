@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Task } from 'src/models/task.class';
 
@@ -12,17 +12,31 @@ export class DialogCreateTaskComponent implements OnInit {
 
   newTask: Task = new Task();
 
+  /*
   taskForm = new FormGroup({
     title: new FormControl('hehe'),
     description: new FormControl('hihi'),
   });
+  */
 
-  constructor(public dialogRef: MatDialogRef<DialogCreateTaskComponent>) { }
+  firstFormGroup = this._formBuilder.group({
+    taskTitle: ['', Validators.required],
+  });
+
+  secondFormGroup = this._formBuilder.group({
+    taskDescription: ['', Validators.required],
+  });
+
+  isLinear = false;
+
+  constructor(public dialogRef: MatDialogRef<DialogCreateTaskComponent>, private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    /*
     this.taskForm.valueChanges.subscribe(value => {
       console.log(value);
    });
+   */
   }
 
   onNoClick() {
@@ -30,8 +44,8 @@ export class DialogCreateTaskComponent implements OnInit {
   }
 
   createTask() {
-    this.newTask.title = this.taskForm.get('title')?.value;
-    this.newTask.description = this.taskForm.get('description')?.value;
+    this.newTask.title = this.firstFormGroup.get('taskTitle')?.value;
+    this.newTask.description = this.secondFormGroup.get('taskDescription')?.value;
   }
 
 }

@@ -12,6 +12,11 @@ import { DialogCreateTaskComponent } from './dialog-create-task/dialog-create-ta
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
+
 
 @NgModule({
   declarations: [
@@ -29,7 +34,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
-    DragDropModule
+    DragDropModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

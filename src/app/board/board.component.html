@@ -4,7 +4,9 @@
 
         <h2>To Do</h2>
 
-        <div cdkDropList [cdkDropListData]="tasks" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div style="position: relative;" cdkDropList [cdkDropListData]="tasks" class="example-list" (cdkDropListDropped)="drop($event)" [class.hidden]="tasks.length === 0">
+
+            <span style="position: absolute; top: 1.25rem; left: 10px" *ngIf="tasks.length === 0">currently empty</span>
 
             <p class="example-box" *ngFor="let task of tasks" cdkDrag>
                 task: {{ task.title }}, {{ task.description }}
@@ -20,7 +22,7 @@
 
         <div style="position: relative;" cdkDropList [cdkDropListData]="inProgress" class="example-list" (cdkDropListDropped)="drop($event)" [class.hidden]="inProgress.length === 0">
 
-            <span style="position: absolute; top: 1rem;" *ngIf="inProgress.length === 0">currently empty</span>
+            <span style="position: absolute; top: 1.25rem; left: 10px" *ngIf="inProgress.length === 0">currently empty</span>
 
             <p class="example-box" *ngFor="let task of inProgress" cdkDrag>
                 task: {{ task.title }}, {{ task.description }}
@@ -34,7 +36,9 @@
 
         <h2>Testing</h2>
 
-        <div cdkDropList [cdkDropListData]="testing" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div style="position: relative;" cdkDropList [cdkDropListData]="testing" class="example-list" (cdkDropListDropped)="drop($event)" [class.hidden]="testing.length === 0">
+
+            <span style="position: absolute; top: 1.25rem; left: 10px" *ngIf="testing.length === 0">currently empty</span>
 
             <p class="example-box" *ngFor="let task of testing" cdkDrag>
                 task: {{ task.title }}, {{ task.description }}
@@ -48,7 +52,9 @@
         
         <h2>Done</h2>
 
-        <div cdkDropList [cdkDropListData]="done" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div style="position: relative;" cdkDropList [cdkDropListData]="done" class="example-list" (cdkDropListDropped)="drop($event)" [class.hidden]="done.length === 0">
+
+            <span style="position: absolute; top: 1.25rem; left: 10px" *ngIf="done.length === 0">currently empty</span>
 
             <p class="example-box" *ngFor="let task of done" cdkDrag>
                 task: {{ task.title }}, {{ task.description }}

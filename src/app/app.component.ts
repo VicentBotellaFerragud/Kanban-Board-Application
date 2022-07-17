@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogCreateTaskComponent } from './dialog-create-task/dialog-create-task.component';
 import { Task } from 'src/models/task.class';
+import { ReturnStatement } from '@angular/compiler';
 
 @Component({
   selector: 'app-root',
@@ -19,10 +20,15 @@ export class AppComponent {
   openDialog() {
     const dialogRef = this.dialog.open(DialogCreateTaskComponent);
     dialogRef.afterClosed().subscribe(res => {
+
+      if (res.title === '') {
+        console.log(res);
+        return;
+      } else {
+        this.tasks.push(res);
+        console.log(res);
+      }
       
-      console.log(res)
-      this.tasks.push(res);
-      console.log(this.tasks);
     })
   }
 
