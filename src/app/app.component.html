@@ -1,9 +1,13 @@
-<mat-toolbar color="primary">
+<mat-toolbar>
 
-  <span>My Application</span>
-
-  <button mat-button (click)="openDialog()">Open dialog</button>
+  <span>Kanban Board</span>
 
 </mat-toolbar>
 
 <app-board [tasks]="tasks"></app-board>
+
+<button matTooltip="Create a new task" [matTooltipPosition]="'left'" mat-fab color="primary" (click)="openDialog()">
+
+  <mat-icon>add</mat-icon>
+
+</button>

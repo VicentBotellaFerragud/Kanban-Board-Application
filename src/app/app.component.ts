@@ -20,16 +20,16 @@ export class AppComponent {
   openDialog() {
     const dialogRef = this.dialog.open(DialogCreateTaskComponent);
     dialogRef.afterClosed().subscribe(res => {
-
-      if (res.title === '') {
-        console.log(res);
-        return;
-      } else {
+      if (res) {
         this.tasks.push(res);
         console.log(res);
+      } else {
+        return;
       }
       
-    })
+    }
+
+    )
   }
 
 }

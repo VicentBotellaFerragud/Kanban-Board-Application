@@ -12,22 +12,34 @@ export class DialogCreateTaskComponent implements OnInit {
 
   newTask: Task = new Task();
 
-  /*
-  taskForm = new FormGroup({
-    title: new FormControl('hehe'),
-    description: new FormControl('hihi'),
-  });
-  */
-
   firstFormGroup = this._formBuilder.group({
     taskTitle: ['', Validators.required],
   });
 
   secondFormGroup = this._formBuilder.group({
-    taskDescription: ['', Validators.required],
+    taskDescription: ['', Validators.required], 
+  });
+
+  thirdFormGroup = this._formBuilder.group({
+    taskPriority: ['', Validators.required],
+  });
+
+  fourthFormGroup = this._formBuilder.group({
+    taskDueDate: ['', Validators.required],
+  });
+
+  fifthFormGroup = this._formBuilder.group({
+    taskManager: ['', Validators.required],
   });
 
   isLinear = false;
+
+  priorityList: any[] = [
+    {value: 'highest', viewValue: 'Highest'},
+    {value: 'high', viewValue: 'High'},
+    {value: 'medium', viewValue: 'Medium'},
+    {value: 'low', viewValue: 'Low'}
+  ];
 
   constructor(public dialogRef: MatDialogRef<DialogCreateTaskComponent>, private _formBuilder: FormBuilder) { }
 
@@ -46,6 +58,9 @@ export class DialogCreateTaskComponent implements OnInit {
   createTask() {
     this.newTask.title = this.firstFormGroup.get('taskTitle')?.value;
     this.newTask.description = this.secondFormGroup.get('taskDescription')?.value;
+    this.newTask.priority = this.thirdFormGroup.get('taskPriority')?.value;
+    this.newTask.dueTo = this.fourthFormGroup.get('taskDueDate')?.value;
+    this.newTask.assignedTo = this.fifthFormGroup.get('taskManager')?.value;
   }
 
 }

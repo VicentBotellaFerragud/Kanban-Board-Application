@@ -17,8 +17,9 @@ export class BoardComponent implements OnInit {
   done: Task[] = [];
 
   exampleTask: Task = {
-    title: "example", description: "example",
-    urgency: '',
+    title: "example", 
+    description: "example",
+    priority: '',
     createdAt: '',
     dueTo: '',
     assignedTo: ''
@@ -27,6 +28,18 @@ export class BoardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.tasks.push(this.exampleTask);
+    this.tasks.push(this.exampleTask);
+    this.tasks.push(this.exampleTask);
+    this.tasks.push(this.exampleTask);
+    this.tasks.push(this.exampleTask);
+    this.tasks.push(this.exampleTask);
+    this.tasks.push(this.exampleTask);
+    this.tasks.push(this.exampleTask);
+    this.tasks.push(this.exampleTask);
+    this.tasks.push(this.exampleTask);
+    this.tasks.push(this.exampleTask);
+    this.tasks.push(this.exampleTask);
     this.tasks.push(this.exampleTask);
   }
 

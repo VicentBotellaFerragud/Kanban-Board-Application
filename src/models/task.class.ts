@@ -2,7 +2,7 @@ export class Task {
 
     title: string;
     description: string;
-    urgency: string;
+    priority: string;
     createdAt: string;
     dueTo: string;
     assignedTo: string;
@@ -10,7 +10,7 @@ export class Task {
     constructor(obj?: any) {
         this.title = obj ? obj.title : '';
         this.description = obj ? obj.description : '';
-        this.urgency = obj ? obj.urgency : '';
+        this.priority = obj ? obj.urgency : '';
         this.createdAt = obj ? obj.createdAt : '';
         this.dueTo = obj ? obj.dueTo : '';
         this.assignedTo = obj ? obj.assignedTo : '';
