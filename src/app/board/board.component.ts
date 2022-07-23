@@ -1,6 +1,8 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Task } from 'src/models/task.class';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogSeeTaskDetailsComponent } from '../dialog-see-task-details/dialog-see-task-details.component';
 
 @Component({
   selector: 'app-board',
@@ -16,49 +18,65 @@ export class BoardComponent implements OnInit {
   testing: Task[] = [];
   done: Task[] = [];
 
-  exampleTask: Task = {
-    title: "example", 
-    description: "example",
-    priority: '',
-    createdAt: '',
-    dueTo: '',
-    assignedTo: ''
+  firstSampleTask: Task = {
+    title: "Software tests",
+    description: "Software tests needs to be run",
+    priority: 'high',
+    createdAt: '05-05-2022',
+    dueTo: '30-05-2022',
+    assignedTo: 'Mark'
   }
 
-  constructor() { }
+  secondSampleTask: Task = {
+    title: "App video",
+    description: "Video explaining the app needs to be made",
+    priority: 'medium',
+    createdAt: '07-05-2022',
+    dueTo: '31-05-2022',
+    assignedTo: 'Tom'
+  }
+
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.tasks.push(this.exampleTask);
-    this.tasks.push(this.exampleTask);
-    this.tasks.push(this.exampleTask);
-    this.tasks.push(this.exampleTask);
-    this.tasks.push(this.exampleTask);
-    this.tasks.push(this.exampleTask);
-    this.tasks.push(this.exampleTask);
-    this.tasks.push(this.exampleTask);
-    this.tasks.push(this.exampleTask);
-    this.tasks.push(this.exampleTask);
-    this.tasks.push(this.exampleTask);
-    this.tasks.push(this.exampleTask);
-    this.tasks.push(this.exampleTask);
+
+    this.tasks.push(this.firstSampleTask);
+    this.tasks.push(this.secondSampleTask);
+
   }
 
   drop(event: CdkDragDrop<Task[]>) {
+
     if (event.previousContainer === event.container) {
+
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+
     } else {
+
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex,
       );
+
     }
+
   }
 
-  //I need to add an event emitter or something in order to push the newTask into the tasks array.
-  //I could use ngOnChanges to detect the change of the input value and every time it changes I would push the newTask into the tasks array, 
-  //but that's not recommended. FUrthermore ngOnChanges is called not just when the input value changes. THAT MEANS THE SAME TASK WOULD
-  //BE ADDED SEVERAL TIMES.
+  showTaskDetails(task: Task) {
+
+    this.dialog.open(DialogSeeTaskDetailsComponent, {
+      data: {
+        title: task.title,
+        description: task.description,
+        priority: task.priority,
+        createdAt: task.createdAt,
+        dueTo: task.dueTo,
+        assignedTo: task.assignedTo
+      }
+    });
+
+  }
 
 }

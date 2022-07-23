@@ -1,0 +1,19 @@
+<div class="detailed-task-container">
+
+    <p>Title: {{ data.title }}</p>
+
+    <p>Description: {{ data.description }}</p>
+
+    <p>Priority: {{ data.priority }}</p>
+
+    <p>Created at: {{ data.createdAt }}</p>
+
+    <p>Due to: {{ data.dueTo }}</p>
+
+    <p>Assigned to: {{ data.assignedTo }}</p>
+
+</div>
+
+<div mat-dialog-actions align="end">
+    <button mat-button (click)="closeMatDialog()">Close</button>
+</div>

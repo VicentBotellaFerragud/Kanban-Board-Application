@@ -19,13 +19,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-
+import { MatMenuModule } from '@angular/material/menu';
+import { DialogSeeTaskDetailsComponent } from './dialog-see-task-details/dialog-see-task-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BoardComponent,
-    DialogCreateTaskComponent
+    DialogCreateTaskComponent,
+    DialogSeeTaskDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatSelectModule,
     MatTooltipModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

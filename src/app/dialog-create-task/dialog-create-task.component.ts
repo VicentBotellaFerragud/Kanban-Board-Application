@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Task } from 'src/models/task.class';
 
@@ -32,7 +32,7 @@ export class DialogCreateTaskComponent implements OnInit {
     taskManager: ['', Validators.required],
   });
 
-  isLinear = false;
+  isLinear: boolean = false;
 
   priorityList: any[] = [
     {value: 'highest', viewValue: 'Highest'},
@@ -43,24 +43,22 @@ export class DialogCreateTaskComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<DialogCreateTaskComponent>, private _formBuilder: FormBuilder) { }
 
-  ngOnInit(): void {
-    /*
-    this.taskForm.valueChanges.subscribe(value => {
-      console.log(value);
-   });
-   */
-  }
-
-  onNoClick() {
-    this.dialogRef.close();
-  }
+  ngOnInit(): void { }
 
   createTask() {
+
     this.newTask.title = this.firstFormGroup.get('taskTitle')?.value;
     this.newTask.description = this.secondFormGroup.get('taskDescription')?.value;
     this.newTask.priority = this.thirdFormGroup.get('taskPriority')?.value;
     this.newTask.dueTo = this.fourthFormGroup.get('taskDueDate')?.value;
     this.newTask.assignedTo = this.fifthFormGroup.get('taskManager')?.value;
+    
+  }
+
+  closeMatDialog() {
+
+    this.dialogRef.close();
+    
   }
 
 }

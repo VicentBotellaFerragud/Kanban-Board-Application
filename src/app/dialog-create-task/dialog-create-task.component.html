@@ -1,99 +1,138 @@
 <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
     
     <mat-step [stepControl]="firstFormGroup">
+      
       <form [formGroup]="firstFormGroup">
+        
         <ng-template matStepLabel>Give your new task a title</ng-template>
+        
         <mat-form-field appearance="fill">
           <mat-label>Title</mat-label>
           <input matInput formControlName="taskTitle" required>
         </mat-form-field>
+        
         <div>
           <button mat-button matStepperNext>Next</button>
         </div>
+
       </form>
+
     </mat-step>
 
     <mat-step [stepControl]="secondFormGroup">
+      
       <form [formGroup]="secondFormGroup">
+        
         <ng-template matStepLabel>Give your new task a description</ng-template>
+        
         <mat-form-field appearance="fill">
           <mat-label>Description</mat-label>
           <input matInput formControlName="taskDescription" required>
         </mat-form-field>
+        
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext>Next</button>
         </div>
+      
       </form>
+
     </mat-step>
 
     <mat-step [stepControl]="thirdFormGroup">
-    <form [formGroup]="thirdFormGroup">
+    
+      <form [formGroup]="thirdFormGroup">
+        
         <ng-template matStepLabel>Set a priority for your new task</ng-template>
+        
         <mat-form-field appearance="fill">
-        <mat-label>Priority</mat-label>
-        <mat-select formControlName="taskPriority">
-          <mat-option *ngFor="let item of priorityList" [value]="item.value">
-            {{item.viewValue}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
+          <mat-label>Priority</mat-label>
+          <mat-select formControlName="taskPriority">
+            <mat-option *ngFor="let item of priorityList" [value]="item.value">
+              {{item.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+
+      </form>
+
     </mat-step>
     
     <mat-step [stepControl]="fourthFormGroup">
+      
       <form [formGroup]="fourthFormGroup">
-      <ng-template matStepLabel>Choose a due date for your new task</ng-template>
-      <mat-form-field appearance="fill" style="margin-bottom: 1.34375em">
-        <mat-label>Due date</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="taskDueDate">
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
+      
+        <ng-template matStepLabel>Choose a due date for your new task</ng-template>
+      
+        <mat-form-field appearance="fill" style="margin-bottom: 1.34375em">
+          <mat-label>Due date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="taskDueDate">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+
       </form>
+
     </mat-step>
 
     <mat-step [stepControl]="fifthFormGroup">
+
       <form [formGroup]="fifthFormGroup">
+        
         <ng-template matStepLabel>Assign your new task to someone</ng-template>
+        
         <mat-form-field appearance="fill">
           <mat-label>Assigned to</mat-label>
           <input matInput formControlName="taskManager" required>
         </mat-form-field>
+        
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext>Next</button>
         </div>
+
       </form>
+
     </mat-step>
 
     <mat-step>
+      
       <ng-template matStepLabel>Done</ng-template>
+      
       <div style="margin-top: 16px;">
-      <p>If you filled in all the input fields then you are now done.</p> 
-      <p>Click on "Create Task" to create the new task.</p>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-        <button mat-button [mat-dialog-close]="newTask" (click)="createTask()" 
-        [disabled]="!firstFormGroup.valid || !secondFormGroup.valid || !thirdFormGroup.valid || !fourthFormGroup.valid || !fifthFormGroup.valid">
-          Create Task
-        </button>
+        
+        <p>If you filled in all the input fields then you are now done.</p> 
+        <p>Click on "Create Task" to create the new task.</p>
+        <p>Or click on "Reset" if you want to delete the entered information.</p>
+
+        <div>
+
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+          <button mat-button [mat-dialog-close]="newTask" (click)="createTask()" 
+            [disabled]="!firstFormGroup.valid || !secondFormGroup.valid || !thirdFormGroup.valid || !fourthFormGroup.valid || !fifthFormGroup.valid">
+            Create Task
+          </button>
+
+        </div>
+
       </div>
-    </div>
+
     </mat-step>
 
   </mat-stepper>
 
 <div mat-dialog-actions align="end">
-    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button (click)="closeMatDialog()">Close</button>
 </div>
