@@ -9,7 +9,7 @@
 
             <span class="currently-empty-span" *ngIf="tasks.length === 0">currently empty</span>
 
-            <p class="task" *ngFor="let task of tasks" cdkDrag>
+            <p class="task" *ngFor="let task of tasks; index as i" cdkDrag>
 
                 <span>{{ task.title }}</span>
 
@@ -19,7 +19,7 @@
                         <mat-icon>info</mat-icon>
                         See details
                     </button>
-                    <button mat-menu-item class="item-btn delete">
+                    <button mat-menu-item class="item-btn delete" (click)="deleteTask(i, tasks)">
                         <mat-icon color="warning">delete</mat-icon>
                         Delete
                     </button>
@@ -40,9 +40,21 @@
 
             <span class="currently-empty-span" *ngIf="inProgress.length === 0">currently empty</span>
 
-            <p class="task" *ngFor="let task of inProgress" cdkDrag>
+            <p class="task" *ngFor="let task of inProgress; index as i" cdkDrag>
 
                 <span>{{ task.title }}</span>
+
+                <mat-icon mat-button [matMenuTriggerFor]="menu" class="menu-btn">more_vert</mat-icon>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item class="item-btn info" (click)="showTaskDetails(task)">
+                        <mat-icon>info</mat-icon>
+                        See details
+                    </button>
+                    <button mat-menu-item class="item-btn delete" (click)="deleteTask(i, inProgress)">
+                        <mat-icon color="warning">delete</mat-icon>
+                        Delete
+                    </button>
+                </mat-menu>
 
             </p>
 
@@ -59,9 +71,21 @@
 
             <span class="currently-empty-span" *ngIf="testing.length === 0">currently empty</span>
 
-            <p class="task" *ngFor="let task of testing" cdkDrag>
+            <p class="task" *ngFor="let task of testing; index as i" cdkDrag>
 
                 <span>{{ task.title }}</span>
+
+                <mat-icon mat-button [matMenuTriggerFor]="menu" class="menu-btn">more_vert</mat-icon>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item class="item-btn info" (click)="showTaskDetails(task)">
+                        <mat-icon>info</mat-icon>
+                        See details
+                    </button>
+                    <button mat-menu-item class="item-btn delete" (click)="deleteTask(i, testing)">
+                        <mat-icon color="warning">delete</mat-icon>
+                        Delete
+                    </button>
+                </mat-menu>
 
             </p>
 
@@ -78,9 +102,21 @@
 
             <span class="currently-empty-span" *ngIf="done.length === 0">currently empty</span>
 
-            <p class="task" *ngFor="let task of done" cdkDrag>
+            <p class="task" *ngFor="let task of done; index as i" cdkDrag>
 
                 <span>{{ task.title }}</span>
+
+                <mat-icon mat-button [matMenuTriggerFor]="menu" class="menu-btn">more_vert</mat-icon>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item class="item-btn info" (click)="showTaskDetails(task)">
+                        <mat-icon>info</mat-icon>
+                        See details
+                    </button>
+                    <button mat-menu-item class="item-btn delete" (click)="deleteTask(i, done)">
+                        <mat-icon color="warning">delete</mat-icon>
+                        Delete
+                    </button>
+                </mat-menu>
 
             </p>
 

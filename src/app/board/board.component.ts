@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Task } from 'src/models/task.class';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogSeeTaskDetailsComponent } from '../dialog-see-task-details/dialog-see-task-details.component';
+import { TaskService } from 'src/services/task.service';
 
 @Component({
   selector: 'app-board',
@@ -11,9 +12,7 @@ import { DialogSeeTaskDetailsComponent } from '../dialog-see-task-details/dialog
 })
 export class BoardComponent implements OnInit {
 
-  @Input()
   tasks: Task[] = [];
-
   inProgress: Task[] = [];
   testing: Task[] = [];
   done: Task[] = [];
@@ -31,17 +30,26 @@ export class BoardComponent implements OnInit {
     title: "App video",
     description: "Video explaining the app needs to be made",
     priority: 'medium',
-    createdAt: '07-05-2022',
-    dueTo: '31-05-2022',
+    createdAt: '07/05/2022',
+    dueTo: '31/05/2022',
     assignedTo: 'Tom'
   }
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private taskService: TaskService) { }
 
   ngOnInit(): void {
 
-    this.tasks.push(this.firstSampleTask);
-    this.tasks.push(this.secondSampleTask);
+    this.taskService.loadTasks();
+
+    this.tasks = this.taskService.tasks;
+    this.inProgress = this.taskService.inProgress;
+    this.testing = this.taskService.testing;
+    this.done = this.taskService.done;
+
+    if (this.tasks.length === 0 && this.inProgress.length === 0 && this.testing.length === 0 && this.done.length === 0) {
+      this.tasks.push(this.firstSampleTask);
+      this.tasks.push(this.secondSampleTask);
+    }
 
   }
 
@@ -62,6 +70,14 @@ export class BoardComponent implements OnInit {
 
     }
 
+    //This step is not really necessary... could be removed in the future.
+    this.taskService.tasks = this.tasks;
+    this.taskService.inProgress = this.inProgress;
+    this.taskService.testing = this.testing;
+    this.taskService.done = this.done;
+
+    this.taskService.saveTasks();
+
   }
 
   showTaskDetails(task: Task) {
@@ -76,6 +92,20 @@ export class BoardComponent implements OnInit {
         assignedTo: task.assignedTo
       }
     });
+
+  }
+
+  deleteTask(taskId: number, arr: Task[]) {
+
+    arr.splice(taskId, 1);
+
+    //This step is not really necessary... could be removed in the future.
+    this.taskService.tasks = this.tasks;
+    this.taskService.inProgress = this.inProgress;
+    this.taskService.testing = this.testing;
+    this.taskService.done = this.done;
+
+    this.taskService.saveTasks();
 
   }
 

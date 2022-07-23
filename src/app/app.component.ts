@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogCreateTaskComponent } from './dialog-create-task/dialog-create-task.component';
-import { Task } from 'src/models/task.class';
 
 @Component({
   selector: 'app-root',
@@ -12,27 +11,11 @@ export class AppComponent {
 
   title = 'Kanban-Board-Application';
 
-  tasks: Task[] = [];
-
   constructor(public dialog: MatDialog) { }
 
   openDialog() {
     
-    const dialogRef = this.dialog.open(DialogCreateTaskComponent);
-    
-    dialogRef.afterClosed().subscribe(res => {
-
-      if (res) {
-
-        this.tasks.push(res);
-
-      } else {
-
-        return;
-
-      }
-      
-    });
+    this.dialog.open(DialogCreateTaskComponent);
 
   }
 

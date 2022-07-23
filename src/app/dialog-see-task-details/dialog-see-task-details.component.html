@@ -4,11 +4,11 @@
 
     <p>Description: {{ data.description }}</p>
 
-    <p>Priority: {{ data.priority }}</p>
+    <p>Priority: {{ data.priority | titlecase }}</p>
 
-    <p>Created at: {{ data.createdAt }}</p>
+    <p>Created at: {{ data.createdAt }} (DD/MM/YYYY format)</p>
 
-    <p>Due to: {{ data.dueTo }}</p>
+    <p>Due to: {{ data.dueTo }} (DD/MM/YYYY format)</p>
 
     <p>Assigned to: {{ data.assignedTo }}</p>
 

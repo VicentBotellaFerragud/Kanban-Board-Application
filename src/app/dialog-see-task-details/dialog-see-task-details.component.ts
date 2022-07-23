@@ -10,16 +10,12 @@ export class DialogSeeTaskDetailsComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DialogSeeTaskDetailsComponent>) { }
 
-  ngOnInit(): void {
-
-    console.log(this.data);
-
-  }
+  ngOnInit(): void { }
 
   closeMatDialog() {
 
     this.dialogRef.close();
-    
+
   }
 
 }

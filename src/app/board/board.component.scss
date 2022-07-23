@@ -29,12 +29,13 @@
 
 .empty {
     background-color: rgba(0, 0, 0, 0.15) !important;
-    border: none !important;  
+    border: none !important;
+    height: 72px;  
 }
 
 .currently-empty-span {
     position: absolute; 
-    top: 1.25rem; 
+    top: 26px;
     left: 10px;
 }
 

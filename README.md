@@ -1,5 +1,7 @@
 # KanbanBoardApplication
 
+IMPORTANT! --> It is recommended to use this application only on devices with a screen width of more than 1000px.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
 
 ## Development server
