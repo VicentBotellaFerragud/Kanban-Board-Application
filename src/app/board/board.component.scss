@@ -84,6 +84,16 @@
     }
 }
 
+.edit {
+    transition: 225ms ease-in-out;
+
+    &:hover {
+        mat-icon {
+            color: black;
+        }
+    }
+}
+
 .delete {
     transition: 225ms ease-in-out;
     

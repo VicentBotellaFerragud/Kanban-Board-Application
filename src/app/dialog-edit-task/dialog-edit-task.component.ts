@@ -1,36 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Task } from 'src/models/task.class';
-import { TaskService } from 'src/services/task.service';
 
 @Component({
-  selector: 'app-dialog-create-task',
-  templateUrl: './dialog-create-task.component.html',
-  styleUrls: ['./dialog-create-task.component.scss']
+  selector: 'app-dialog-edit-task',
+  templateUrl: './dialog-edit-task.component.html',
+  styleUrls: ['./dialog-edit-task.component.scss']
 })
-export class DialogCreateTaskComponent implements OnInit {
+export class DialogEditTaskComponent implements OnInit {
 
-  newTask: Task = new Task();
+  editedTask: Task = new Task();
 
   firstFormGroup = this._formBuilder.group({
-    taskTitle: ['', Validators.required],
+    taskTitle: [this.data.title, Validators.required],
   });
 
   secondFormGroup = this._formBuilder.group({
-    taskDescription: ['', Validators.required],
+    taskDescription: [this.data.description, Validators.required],
   });
 
   thirdFormGroup = this._formBuilder.group({
-    taskPriority: ['', Validators.required],
+    taskPriority: [this.data.priority, Validators.required],
   });
 
   fourthFormGroup = this._formBuilder.group({
-    taskDueDate: ['', Validators.required],
+    taskDueDate: [this.data.dueTo, Validators.required],
   });
 
   fifthFormGroup = this._formBuilder.group({
-    taskManager: ['', Validators.required],
+    taskManager: [this.data.assignedTo, Validators.required],
   });
 
   isLinear: boolean = false;
@@ -43,46 +42,29 @@ export class DialogCreateTaskComponent implements OnInit {
   ];
 
   constructor(
-    public dialogRef: MatDialogRef<DialogCreateTaskComponent>, 
     private _formBuilder: FormBuilder, 
-    private taskService: TaskService
+    @Inject(MAT_DIALOG_DATA) public data: any, 
+    public dialogRef: MatDialogRef<DialogEditTaskComponent>
     ) { }
 
   ngOnInit(): void { }
 
-  
   closeMatDialog() {
 
     this.dialogRef.close();
 
   }
 
-  createTask() {
-
-    let createdAt = this.getCurrentDate();
+  save() {
 
     let dueDate = this.convertDueDate(this.fourthFormGroup.get('taskDueDate')?.value);
 
-    this.newTask.title = this.firstFormGroup.get('taskTitle')?.value;
-    this.newTask.description = this.secondFormGroup.get('taskDescription')?.value;
-    this.newTask.priority = this.thirdFormGroup.get('taskPriority')?.value;
-    this.newTask.createdAt = createdAt;
-    this.newTask.dueTo = dueDate;
-    this.newTask.assignedTo = this.fifthFormGroup.get('taskManager')?.value;
-
-    this.taskService.tasks.push(this.newTask);
-    this.taskService.saveTasks();
-
-  }
-
-  getCurrentDate() {
-
-    let today = new Date();
-    let dd = String(today.getDate()).padStart(2, '0');
-    let mm = String(today.getMonth() + 1).padStart(2, '0');
-    let yyyy = today.getFullYear();
-
-    return mm + '/' + dd + '/' + yyyy;
+    this.editedTask.title = this.firstFormGroup.get('taskTitle')?.value;
+    this.editedTask.description = this.secondFormGroup.get('taskDescription')?.value;
+    this.editedTask.priority = this.thirdFormGroup.get('taskPriority')?.value;
+    this.editedTask.createdAt = this.data.createdAt;
+    this.editedTask.dueTo = dueDate;
+    this.editedTask.assignedTo = this.fifthFormGroup.get('taskManager')?.value;
 
   }
 

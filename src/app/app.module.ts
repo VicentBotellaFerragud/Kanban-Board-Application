@@ -21,6 +21,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { DialogSeeTaskDetailsComponent } from './dialog-see-task-details/dialog-see-task-details.component';
+import { DialogEditTaskComponent } from './dialog-edit-task/dialog-edit-task.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { DialogSeeTaskDetailsComponent } from './dialog-see-task-details/dialog-
     BoardComponent,
     DialogCreateTaskComponent,
     DialogSeeTaskDetailsComponent,
+    DialogEditTaskComponent,
   ],
   imports: [
     BrowserModule,

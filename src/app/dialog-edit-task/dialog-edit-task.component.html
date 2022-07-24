@@ -1,0 +1,138 @@
+<mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+    
+    <mat-step [stepControl]="firstFormGroup">
+      
+      <form [formGroup]="firstFormGroup">
+        
+        <ng-template matStepLabel>Edit the title of your task</ng-template>
+        
+        <mat-form-field appearance="fill">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="taskTitle" required>
+        </mat-form-field>
+        
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+
+      </form>
+
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup">
+      
+      <form [formGroup]="secondFormGroup">
+        
+        <ng-template matStepLabel>Edit the description of yout task</ng-template>
+        
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <input matInput formControlName="taskDescription" required>
+        </mat-form-field>
+        
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      
+      </form>
+
+    </mat-step>
+
+    <mat-step [stepControl]="thirdFormGroup">
+    
+      <form [formGroup]="thirdFormGroup">
+        
+        <ng-template matStepLabel>Edit the priority of your task</ng-template>
+        
+        <mat-form-field appearance="fill">
+          <mat-label>Priority</mat-label>
+          <mat-select formControlName="taskPriority">
+            <mat-option *ngFor="let item of priorityList" [value]="item.value">
+              {{item.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+
+      </form>
+
+    </mat-step>
+    
+    <mat-step [stepControl]="fourthFormGroup">
+      
+      <form [formGroup]="fourthFormGroup">
+      
+        <ng-template matStepLabel>Edit the due date of your task</ng-template>
+      
+        <mat-form-field appearance="fill" style="margin-bottom: 1.34375em">
+          <mat-label>Due date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="taskDueDate" placeholder="{{ data.dueTo }}">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+
+      </form>
+
+    </mat-step>
+
+    <mat-step [stepControl]="fifthFormGroup">
+
+      <form [formGroup]="fifthFormGroup">
+        
+        <ng-template matStepLabel>Edit your task assignee</ng-template>
+        
+        <mat-form-field appearance="fill">
+          <mat-label>Assigned to</mat-label>
+          <input matInput formControlName="taskManager" required>
+        </mat-form-field>
+        
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+
+      </form>
+
+    </mat-step>
+
+    <mat-step>
+      
+      <ng-template matStepLabel>Done</ng-template>
+      
+      <div style="margin-top: 16px;">
+        
+        <p>Remember that no input field should be left empty.</p> 
+        <p>Click on "Save" to save the changes.</p>
+        <p>Or click on "Reset" if you want to delete the entered information.</p>
+
+        <div>
+
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+          <button mat-button [mat-dialog-close]="editedTask" (click)="save()" 
+            [disabled]="!firstFormGroup.valid || !secondFormGroup.valid || !thirdFormGroup.valid || !fourthFormGroup.valid || !fifthFormGroup.valid">
+            Save
+          </button>
+
+        </div>
+
+      </div>
+
+    </mat-step>
+
+  </mat-stepper>
+
+<div mat-dialog-actions align="end">
+    <button mat-button (click)="closeMatDialog()">Close</button>
+</div>

@@ -19,6 +19,10 @@
                         <mat-icon>info</mat-icon>
                         See details
                     </button>
+                    <button mat-menu-item class="item-btn edit" (click)="editTask(task, i, tasks)">
+                        <mat-icon>edit</mat-icon>
+                        Edit
+                    </button>
                     <button mat-menu-item class="item-btn delete" (click)="deleteTask(i, tasks)">
                         <mat-icon color="warning">delete</mat-icon>
                         Delete
@@ -49,6 +53,10 @@
                     <button mat-menu-item class="item-btn info" (click)="showTaskDetails(task)">
                         <mat-icon>info</mat-icon>
                         See details
+                    </button>
+                    <button mat-menu-item class="item-btn edit" (click)="editTask(task, i, inProgress)">
+                        <mat-icon>edit</mat-icon>
+                        Edit
                     </button>
                     <button mat-menu-item class="item-btn delete" (click)="deleteTask(i, inProgress)">
                         <mat-icon color="warning">delete</mat-icon>
@@ -81,6 +89,10 @@
                         <mat-icon>info</mat-icon>
                         See details
                     </button>
+                    <button mat-menu-item class="item-btn edit" (click)="editTask(task, i, testing)">
+                        <mat-icon>edit</mat-icon>
+                        Edit
+                    </button>
                     <button mat-menu-item class="item-btn delete" (click)="deleteTask(i, testing)">
                         <mat-icon color="warning">delete</mat-icon>
                         Delete
@@ -111,6 +123,10 @@
                     <button mat-menu-item class="item-btn info" (click)="showTaskDetails(task)">
                         <mat-icon>info</mat-icon>
                         See details
+                    </button>
+                    <button mat-menu-item class="item-btn edit" (click)="editTask(task, i, done)">
+                        <mat-icon>edit</mat-icon>
+                        Edit
                     </button>
                     <button mat-menu-item class="item-btn delete" (click)="deleteTask(i, done)">
                         <mat-icon color="warning">delete</mat-icon>

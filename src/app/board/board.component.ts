@@ -4,6 +4,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { MatDialog } from '@angular/material/dialog';
 import { DialogSeeTaskDetailsComponent } from '../dialog-see-task-details/dialog-see-task-details.component';
 import { TaskService } from 'src/services/task.service';
+import { DialogEditTaskComponent } from '../dialog-edit-task/dialog-edit-task.component';
 
 @Component({
   selector: 'app-board',
@@ -91,6 +92,38 @@ export class BoardComponent implements OnInit {
         dueTo: task.dueTo,
         assignedTo: task.assignedTo
       }
+    });
+
+  }
+
+  editTask(task: Task, taskId: number, arr: Task[]) {
+
+    let dialogRef = this.dialog.open(DialogEditTaskComponent, {
+      data: {
+        title: task.title,
+        description: task.description,
+        priority: task.priority,
+        createdAt: task.createdAt,
+        dueTo: task.dueTo,
+        assignedTo: task.assignedTo
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((data: Task) => {
+      console.log(data);
+
+      this.deleteTask(taskId, arr);
+
+      arr.splice(taskId, 0, data);
+
+      //This step is not really necessary... could be removed in the future.
+      this.taskService.tasks = this.tasks;
+      this.taskService.inProgress = this.inProgress;
+      this.taskService.testing = this.testing;
+      this.taskService.done = this.done;
+
+      this.taskService.saveTasks();
+
     });
 
   }
