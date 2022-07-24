@@ -29,7 +29,7 @@ export class DialogEditTaskComponent implements OnInit {
   });
 
   fifthFormGroup = this._formBuilder.group({
-    taskManager: [this.data.assignedTo, Validators.required],
+    taskAssignee: [this.data.assignedTo, Validators.required],
   });
 
   isLinear: boolean = false;
@@ -51,6 +51,15 @@ export class DialogEditTaskComponent implements OnInit {
 
   closeMatDialog() {
 
+    /*
+    this.editedTask.title = this.data.title;
+    this.editedTask.description = this.data.description;
+    this.editedTask.priority = this.data.priority;
+    this.editedTask.createdAt = this.data.createdAt;
+    this.editedTask.dueTo = this.data.dueTo;
+    this.editedTask.assignedTo = this.data.assignedTo;
+    */
+
     this.dialogRef.close();
 
   }
@@ -64,7 +73,7 @@ export class DialogEditTaskComponent implements OnInit {
     this.editedTask.priority = this.thirdFormGroup.get('taskPriority')?.value;
     this.editedTask.createdAt = this.data.createdAt;
     this.editedTask.dueTo = dueDate;
-    this.editedTask.assignedTo = this.fifthFormGroup.get('taskManager')?.value;
+    this.editedTask.assignedTo = this.fifthFormGroup.get('taskAssignee')?.value;
 
   }
 

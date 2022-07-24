@@ -30,7 +30,7 @@ export class DialogCreateTaskComponent implements OnInit {
   });
 
   fifthFormGroup = this._formBuilder.group({
-    taskManager: ['', Validators.required],
+    taskAssignee: ['', Validators.required],
   });
 
   isLinear: boolean = false;
@@ -68,7 +68,7 @@ export class DialogCreateTaskComponent implements OnInit {
     this.newTask.priority = this.thirdFormGroup.get('taskPriority')?.value;
     this.newTask.createdAt = createdAt;
     this.newTask.dueTo = dueDate;
-    this.newTask.assignedTo = this.fifthFormGroup.get('taskManager')?.value;
+    this.newTask.assignedTo = this.fifthFormGroup.get('taskAssignee')?.value;
 
     this.taskService.tasks.push(this.newTask);
     this.taskService.saveTasks();

@@ -109,20 +109,22 @@ export class BoardComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe((data: Task) => {
-      console.log(data);
+    dialogRef.afterClosed().subscribe((data?: Task) => {
 
-      this.deleteTask(taskId, arr);
+      if (data) {
+        this.deleteTask(taskId, arr);
 
-      arr.splice(taskId, 0, data);
-
-      //This step is not really necessary... could be removed in the future.
-      this.taskService.tasks = this.tasks;
-      this.taskService.inProgress = this.inProgress;
-      this.taskService.testing = this.testing;
-      this.taskService.done = this.done;
-
-      this.taskService.saveTasks();
+        arr.splice(taskId, 0, data);
+  
+        //This step is not really necessary... could be removed in the future.
+        this.taskService.tasks = this.tasks;
+        this.taskService.inProgress = this.inProgress;
+        this.taskService.testing = this.testing;
+        this.taskService.done = this.done;
+  
+        this.taskService.saveTasks();
+      }
+     
 
     });
 
