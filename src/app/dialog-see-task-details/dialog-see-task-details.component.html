@@ -1,16 +1,16 @@
 <div class="detailed-task-container">
 
-    <p>Title: {{ data.title }}</p>
+    <p>Title: <b>{{ data.title }}</b></p>
 
-    <p>Description: {{ data.description }}</p>
+    <p>Description: <b>{{ data.description }}</b></p>
 
-    <p>Priority: {{ data.priority | titlecase }}</p>
+    <p>Priority: <b>{{ data.priority | titlecase }}</b></p>
 
-    <p>Created at: {{ data.createdAt }} (DD/MM/YYYY format)</p>
+    <p>Created at: <b>{{ data.createdAt }}</b> (dd/mm/yyyy)</p>
 
-    <p>Due to: {{ data.dueTo }} (DD/MM/YYYY format)</p>
+    <p>Due to: <b>{{ data.dueTo }}</b> (dd/mm/yyyy)</p>
 
-    <p>Assigned to: {{ data.assignedTo }}</p>
+    <p>Assigned to: <b>{{ data.assignedTo }}</b></p>
 
 </div>
 
