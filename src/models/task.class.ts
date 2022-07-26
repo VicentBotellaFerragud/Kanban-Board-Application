@@ -15,4 +15,5 @@ export class Task {
         this.dueTo = obj ? obj.dueTo : '';
         this.assignedTo = obj ? obj.assignedTo : '';
     } 
+    
 }
