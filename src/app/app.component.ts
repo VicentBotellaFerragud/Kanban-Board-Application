@@ -13,6 +13,9 @@ export class AppComponent {
 
   constructor(public dialog: MatDialog) { }
 
+  /**
+   * Opens the 'DialogCreateTaskComponent'.
+   */
   openDialog() {
     
     this.dialog.open(DialogCreateTaskComponent);

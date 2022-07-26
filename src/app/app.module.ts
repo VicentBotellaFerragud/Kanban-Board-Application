@@ -49,7 +49,7 @@ import { DialogEditTaskComponent } from './dialog-edit-task/dialog-edit-task.com
     MatTooltipModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatMenuModule
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

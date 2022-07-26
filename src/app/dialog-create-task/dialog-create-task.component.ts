@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import * as moment from 'moment';
 import { Task } from 'src/models/task.class';
 import { TaskService } from 'src/services/task.service';
 
@@ -12,6 +13,8 @@ import { TaskService } from 'src/services/task.service';
 export class DialogCreateTaskComponent implements OnInit {
 
   newTask: Task = new Task();
+
+  isLinear: boolean = false;
 
   firstFormGroup = this._formBuilder.group({
     taskTitle: ['', Validators.required],
@@ -33,14 +36,14 @@ export class DialogCreateTaskComponent implements OnInit {
     taskAssignee: ['', Validators.required],
   });
 
-  isLinear: boolean = false;
-
   priorityList: any[] = [
     { value: 'highest', viewValue: 'Highest' },
     { value: 'high', viewValue: 'High' },
     { value: 'medium', viewValue: 'Medium' },
     { value: 'low', viewValue: 'Low' }
   ];
+
+  minDate = moment(new Date()).format('YYYY-MM-DD')
 
   constructor(
     public dialogRef: MatDialogRef<DialogCreateTaskComponent>, 
@@ -50,13 +53,22 @@ export class DialogCreateTaskComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  
+  /**
+   * Closes the dialog.
+   */
   closeMatDialog() {
 
     this.dialogRef.close();
 
   }
 
+  /**
+   * Creates a new task by taking the values of the form groups and assigning them to each of the properties of the newTask (of type 
+   * 'Task') variable (for one specific property of the task the function makes use of another function instead of a form group value). 
+   * The function then calls the task service to save the newly created task in one of its properties (tasks) and finally calls one of its 
+   * methods (saveTasks) to store it in the local storage as well. Saving the new created task in the service is very important because 
+   * this way other components can make use of it very easily.
+   */
   createTask() {
 
     let createdAt = this.getCurrentDate();
@@ -75,6 +87,10 @@ export class DialogCreateTaskComponent implements OnInit {
 
   }
 
+  /**
+   * Gets the current date in 'mm/dd/yyyy' format.
+   * @returns - the current date in 'mm/dd/yyyy' format.
+   */
   getCurrentDate() {
 
     let today = new Date();
@@ -86,6 +102,11 @@ export class DialogCreateTaskComponent implements OnInit {
 
   }
 
+  /**
+   * Converts the date entered by the user into 'mm/dd/yyyy' format.
+   * @param date - This is the date to convert (it comes from the 'taskDueDate' form control name value).
+   * @returns - the date entered by the user in 'mm/dd/yyyy' format.
+   */
   convertDueDate(date: string) {
 
     let dateWithoutSpaces = (date.toString()).replace(/ /g,'');
