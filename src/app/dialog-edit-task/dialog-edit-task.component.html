@@ -71,7 +71,7 @@
       
         <mat-form-field appearance="fill" style="margin-bottom: 1.34375em">
           <mat-label>Due date</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="taskDueDate" placeholder="{{ data.dueTo }}">
+          <input matInput [matDatepicker]="picker" [min]="minDate" formControlName="taskDueDate" placeholder="{{ data.dueTo }}">
           <mat-hint>MM/DD/YYYY</mat-hint>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>

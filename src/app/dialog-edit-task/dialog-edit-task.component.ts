@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import * as moment from 'moment';
 import { Task } from 'src/models/task.class';
 
 @Component({
@@ -11,6 +12,8 @@ import { Task } from 'src/models/task.class';
 export class DialogEditTaskComponent implements OnInit {
 
   editedTask: Task = new Task();
+
+  isLinear: boolean = false;
 
   firstFormGroup = this._formBuilder.group({
     taskTitle: [this.data.title, Validators.required],
@@ -32,14 +35,14 @@ export class DialogEditTaskComponent implements OnInit {
     taskAssignee: [this.data.assignedTo, Validators.required],
   });
 
-  isLinear: boolean = false;
-
   priorityList: any[] = [
     { value: 'highest', viewValue: 'Highest' },
     { value: 'high', viewValue: 'High' },
     { value: 'medium', viewValue: 'Medium' },
     { value: 'low', viewValue: 'Low' }
   ];
+
+  minDate = moment(new Date()).format('YYYY-MM-DD');
 
   constructor(
     private _formBuilder: FormBuilder, 
@@ -49,21 +52,24 @@ export class DialogEditTaskComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  /**
+   * Closes the dialog.
+   */
   closeMatDialog() {
-
-    /*
-    this.editedTask.title = this.data.title;
-    this.editedTask.description = this.data.description;
-    this.editedTask.priority = this.data.priority;
-    this.editedTask.createdAt = this.data.createdAt;
-    this.editedTask.dueTo = this.data.dueTo;
-    this.editedTask.assignedTo = this.data.assignedTo;
-    */
 
     this.dialogRef.close();
 
   }
 
+  /**
+   * Assigns the values of the form groups to each of the properties of the editedTask (of type 'Task') variable. For one specific 
+   * property of the task the function makes use of the 'data' variable (declared in the constructor), which comes from the file 
+   * 'board.component.ts' and allows the app to get the current information of the task being edited (the information of the task 
+   * BEFORE the user edits it). It is important to note that, unlike in the 'dialog-create-task.component.ts' file, here the task 
+   * service is not called to save the changes. This is because this functionality is performed in this case in the 'board.component.ts' 
+   * file, which, once the dialog-edit-task component is closed, receives from this function the necessary information to create a 
+   * new task that will replace the old one (the current task BEFORE the user modifies it).
+   */
   save() {
 
     let dueDate = this.convertDueDate(this.fourthFormGroup.get('taskDueDate')?.value);
@@ -77,6 +83,11 @@ export class DialogEditTaskComponent implements OnInit {
 
   }
 
+  /**
+   * Converts the date entered by the user into 'mm/dd/yyyy' format.
+   * @param date - This is the date to convert (it comes from the 'taskDueDate' form control name value).
+   * @returns - the date entered by the user in 'mm/dd/yyyy' format.
+   */
   convertDueDate(date: string) {
 
     let dateWithoutSpaces = (date.toString()).replace(/ /g,'');

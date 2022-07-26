@@ -12,6 +12,9 @@ export class DialogSeeTaskDetailsComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  /**
+   * Closes the dialog.
+   */
   closeMatDialog() {
 
     this.dialogRef.close();

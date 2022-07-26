@@ -43,7 +43,7 @@ export class DialogCreateTaskComponent implements OnInit {
     { value: 'low', viewValue: 'Low' }
   ];
 
-  minDate = moment(new Date()).format('YYYY-MM-DD')
+  minDate = moment(new Date()).format('YYYY-MM-DD');
 
   constructor(
     public dialogRef: MatDialogRef<DialogCreateTaskComponent>, 
