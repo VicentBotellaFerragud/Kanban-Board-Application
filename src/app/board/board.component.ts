@@ -38,6 +38,12 @@ export class BoardComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private taskService: TaskService) { }
 
+  /**
+   * Calls the loadTasks function from the task service in order to get the data from the local storage and then assigns this data to the
+   * four local arrays (tasks, inProgress, testing, done). This way the 'board.component.html' file can display all the tasks created so
+   * far and, if the function detects that there is no task stored in the local storage, it adds two sample tasks to the tasks array so 
+   * that the user has a reference of what the tasks look like on the kanban board.
+   */
   ngOnInit(): void {
 
     this.taskService.loadTasks();
@@ -48,13 +54,21 @@ export class BoardComponent implements OnInit {
     this.done = this.taskService.done;
 
     if (this.tasks.length === 0 && this.inProgress.length === 0 && this.testing.length === 0 && this.done.length === 0) {
+
       this.tasks.push(this.firstSampleTask);
       this.tasks.push(this.secondSampleTask);
+
     }
 
   }
 
+  /**
+   * 
+   * @param event - This contains all the information of the element
+   */
   drop(event: CdkDragDrop<Task[]>) {
+
+    console.log(event);
 
     if (event.previousContainer === event.container) {
 
@@ -81,6 +95,11 @@ export class BoardComponent implements OnInit {
 
   }
 
+  /**
+   * Opens the 'DialogSeeTaskDetailsComponent' and gives it the data of the passed-in task so that the 
+   * 'dialog-see-task-details.component.html' file can display its details.
+   * @param task - This is the task whose data is passed to 'DialogSeeTaskDetailsComponent'.
+   */
   showTaskDetails(task: Task) {
 
     this.dialog.open(DialogSeeTaskDetailsComponent, {
@@ -96,6 +115,16 @@ export class BoardComponent implements OnInit {
 
   }
 
+  /**
+   * Opens the 'DialogEditTaskComponent' and gives it the data of the passed-in task so that 'dialog-edit-task.component.html' file can 
+   * display its details. Until this point this function does the same as the showTaskDetails function but the difference is that, when 
+   * the 'DialogEditTaskComponent' is closed, the function receives the NEW/EDITED task and pushes it into the same spot where the 
+   * passed-in task was. To do that, the function deletes first the passed-in task (otherwise the new/edited task could never occupy
+   * the exact same spot as the passed-in task).
+   * @param task - This is the task whose data is passed to 'DialogEditTaskComponent'.
+   * @param taskId 
+   * @param arr 
+   */
   editTask(task: Task, taskId: number, arr: Task[]) {
 
     let dialogRef = this.dialog.open(DialogEditTaskComponent, {
@@ -112,6 +141,7 @@ export class BoardComponent implements OnInit {
     dialogRef.afterClosed().subscribe((data?: Task) => {
 
       if (data) {
+
         this.deleteTask(taskId, arr);
 
         arr.splice(taskId, 0, data);
@@ -123,13 +153,18 @@ export class BoardComponent implements OnInit {
         this.taskService.done = this.done;
   
         this.taskService.saveTasks();
+
       }
      
-
     });
 
   }
 
+  /**
+   * Deletes the passed-in task from the passed-in array and calls the saveTasks function from the task service to save the changes made.
+   * @param taskId - This is the id of the passed-in task.
+   * @param arr - This is the passed-in arr.
+   */
   deleteTask(taskId: number, arr: Task[]) {
 
     arr.splice(taskId, 1);
