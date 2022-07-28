@@ -17,7 +17,7 @@ export class DialogCreateTaskComponent implements OnInit {
   isLinear: boolean = false;
 
   firstFormGroup = this._formBuilder.group({
-    taskTitle: ['', Validators.required],
+    taskTitle: ['', Validators.compose([Validators.required, Validators.maxLength(25)])],
   });
 
   secondFormGroup = this._formBuilder.group({

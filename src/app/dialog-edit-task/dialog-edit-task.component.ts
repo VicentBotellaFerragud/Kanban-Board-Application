@@ -16,7 +16,7 @@ export class DialogEditTaskComponent implements OnInit {
   isLinear: boolean = false;
 
   firstFormGroup = this._formBuilder.group({
-    taskTitle: [this.data.title, Validators.required],
+    taskTitle: [this.data.title, Validators.compose([Validators.required, Validators.maxLength(25)])], 
   });
 
   secondFormGroup = this._formBuilder.group({

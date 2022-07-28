@@ -8,7 +8,8 @@
         
         <mat-form-field appearance="fill">
           <mat-label>Title</mat-label>
-          <input matInput formControlName="taskTitle" required>
+          <input matInput formControlName="taskTitle" required maxlength="25">
+          <mat-hint align="end">{{ firstFormGroup.get("taskTitle")?.value.length }} / 25</mat-hint>
         </mat-form-field>
         
         <div>

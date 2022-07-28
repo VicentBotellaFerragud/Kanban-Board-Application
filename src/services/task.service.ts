@@ -15,7 +15,7 @@ export class TaskService {
 
   /**
    * Stores all the data of the four arrays (tasks, inProgress, testing, done) in the local storage.
-   * This may interest you: it does it by converting the task objects to a json string (one json string per array).
+   * This may interest you: it does it by converting the task[] objects to a json string (one json string per array).
    */
   saveTasks() {
 
