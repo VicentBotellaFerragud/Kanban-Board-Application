@@ -63,12 +63,13 @@ export class BoardComponent implements OnInit {
   }
 
   /**
-   * 
-   * @param event - This contains all the information of the element
+   * Allows the drag and drop of tasks over the entire kanban board. The function first removes the task selected by the user from the 
+   * array in which the task was located and then, when the user drops the task onto another category, the function inserts the 
+   * task into the new array in the position the user wants. This is possible thanks to the passed-in event parameter (because it contains 
+   * all the necessary information to enable this functionality).
+   * @param event - This is the passed-in event which contains all the necessary information to enable the drag and drop functionality.
    */
   drop(event: CdkDragDrop<Task[]>) {
-
-    console.log(event);
 
     if (event.previousContainer === event.container) {
 
@@ -122,8 +123,8 @@ export class BoardComponent implements OnInit {
    * passed-in task was. To do that, the function deletes first the passed-in task (otherwise the new/edited task could never occupy
    * the exact same spot as the passed-in task).
    * @param task - This is the task whose data is passed to 'DialogEditTaskComponent'.
-   * @param taskId 
-   * @param arr 
+   * @param taskId - This is the id of the passed-in task.
+   * @param arr - This is the arr of the passed-in task.
    */
   editTask(task: Task, taskId: number, arr: Task[]) {
 
@@ -163,7 +164,7 @@ export class BoardComponent implements OnInit {
   /**
    * Deletes the passed-in task from the passed-in array and calls the saveTasks function from the task service to save the changes made.
    * @param taskId - This is the id of the passed-in task.
-   * @param arr - This is the passed-in arr.
+   * @param arr - This is the arr of the passed-in task.
    */
   deleteTask(taskId: number, arr: Task[]) {
 
