@@ -14,8 +14,8 @@ export class TaskService {
   constructor() { }
 
   /**
-   * Stores all the data of the four arrays (tasks, inProgress, testing, done) in the local storage.
-   * This may interest you: it does it by converting the task[] objects to a json string (one json string per array).
+   * Stores all the data of the four arrays (tasks, inProgress, testing and done) in the local storage.
+   * This may interest you: it does it by converting the task[] objects into json strings (one json string per array).
    */
   saveTasks() {
 
@@ -34,8 +34,8 @@ export class TaskService {
   }
 
   /**
-   * The function takes from the local storage all the data of the four arrays (tasks, inProgress, testing, done) and converts it (from 
-   * json string to Task[] object) so that the app can make use of it (the app can display the previously stored data).
+   * The function takes from the local storage all the data of the four arrays (tasks, inProgress, testing and done) and converts it (from 
+   * json strings into Task[] objects) so that the app can make use of it (meaning --> the app can display the previously stored data).
    */
   loadTasks() {
 
